@@ -7,9 +7,10 @@ import { signIn } from 'next-auth/react';
 import { FcGoogle } from 'react-icons/fc';
 import { LoginSchema, type LoginSchemaType } from '.';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function LoginForm() {
-const router = useRouter();
+  const router = useRouter();
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const {
@@ -47,7 +48,7 @@ const router = useRouter();
   return (
     <div className='bg-white/90 p-5 rounded-md shadow m-4 w-full md:w-xl'>
       <h1 className='text-2xl md:text-4xl font-bold text-center'>Login for better experience</h1>
-      
+
       {errorMsg && (
         <div className="mt-4 p-2 text-sm text-red-600 bg-red-100 rounded border border-red-200 text-center">
           {errorMsg}
@@ -87,6 +88,11 @@ const router = useRouter();
           >
             {isSubmitting ? 'Logging in...' : 'Login'}
           </button>
+          <div className='mt-5 flex w-full items-center justify-between gap-4'>
+            <span className='flex-1 h-[2] bg-gray-300'></span>
+            <span className='text-gray-600'>or</span>
+            <span className='flex-1 h-[2] bg-gray-300'></span>
+          </div>
         </form>
 
         <div>
@@ -98,6 +104,7 @@ const router = useRouter();
             <FcGoogle /> Continue With Google
           </button>
         </div>
+        <p>I haven't an Account? <Link href={"/register"} className='text-blue-500 underline hover:no-underline'>register</Link></p>
       </section>
     </div>
   );
