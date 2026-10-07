@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import gsap from 'gsap'
 import { IoPersonCircleOutline } from 'react-icons/io5'
+import { BiSolidDashboard } from 'react-icons/bi'
 
 const navLink = [
     {
@@ -109,17 +110,28 @@ export default function Navbar() {
                         <span className={`h-0.5 w-full bg-current transition-transform ${menuOpen ? '-translate-y-2 -rotate-45' : ''}`} />
                     </span>
                 </button>
-                <Link
-                    href="/profile"
-                    aria-label="Profile"
-                    className="nav-item flex h-10 w-10 items-center justify-center overflow-hidden rounded-full text-2xl text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
-                >
-                    {data?.user?.image ? (
-                        <img src={data.user.image} alt="Profile" className="h-full w-full object-cover" />
-                    ) : (
-                        <IoPersonCircleOutline />
-                    )}
-                </Link>
+
+                <div className='flex items-center gap-5'>
+                    <Link
+                        href="/profile"
+                        aria-label="Profile"
+                        className="nav-item flex h-10 w-10 items-center justify-center overflow-hidden rounded-full text-2xl text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
+                    >
+                        {data?.user?.image ? (
+                            <img src={data.user.image} alt="Profile" className="h-full w-full object-cover" />
+                        ) : (
+                            <IoPersonCircleOutline />
+                        )}
+                    </Link>
+                    {
+                        data?.user?.role === "ADMIN" &&
+                        <Link
+                            href="/admin"
+                            aria-label="admin"
+                            className="nav-item flex h-10 w-10 items-center justify-center overflow-hidden rounded-full text-2xl text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
+                        ><BiSolidDashboard size={40} /></Link>
+                    }
+                </div>
             </nav>
 
             <div

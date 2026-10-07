@@ -5,7 +5,7 @@ export async function proxy(req: NextRequest) {
     const session = await auth()
     const { pathname } = req.nextUrl;
     
-    const isAdmin = session?.user.role === "admin";
+    const isAdmin = session?.user.role === "ADMIN";
 
     const protectRoute = pathname.startsWith("/admin") || pathname.startsWith("/profile");
     const notGo = pathname.startsWith("/login") || pathname.startsWith("/register");
